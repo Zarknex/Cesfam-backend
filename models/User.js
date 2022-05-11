@@ -13,11 +13,22 @@ const userSchema = mongoose.Schema({
     required: true,
     trim: true
   },
+  email: {
+    type: String,
+    required: true,
+    trim:true,
+    unique: true
+  },
   token: {
     type: String
+  },
+  confirmated: {
+    type: String,
+    default: false
   }
 },{
-  timestamps: true
+  timestamps: true,
+  versionKey: false
 });
 
 userSchema.pre('save', async function(next) {
@@ -28,6 +39,11 @@ userSchema.pre('save', async function(next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+userSchema.methods.confirmPass = async function
+(passwordForm) {
+  return await bcrypt.compare(passwordForm,this.password)
+};
 
 const User = mongoose.model("User", userSchema);
 export default User;
