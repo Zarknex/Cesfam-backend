@@ -34,7 +34,7 @@ const editPrescription = async (req, res) => {
     return res.status(404).json({ msg: error.message });
   }
   if (prescription.doctorId.toString() !== req.user._id.toString()) {
-    const error = new Error("Acción no vlida");
+    const error = new Error("Acción no valida");
     return res.status(401).json({ msg: error.message });
   }
   
