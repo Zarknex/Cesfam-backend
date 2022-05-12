@@ -6,29 +6,39 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     trim:true,
-    unique: true
+    unique: true,
   },
   token: {
     type: String
   },
   confirmated: {
     type: String,
-    default: false
+    default: false,
   }
 },{
   timestamps: true,
-  versionKey: false
+  versionKey: false,
 });
 
 userSchema.pre('save', async function(next) {
