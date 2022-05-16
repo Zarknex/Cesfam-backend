@@ -31,6 +31,8 @@ app.use(cors(corsOptions));
 
 const port = process.env.PORT || 4000;
 app.use(express.json());
+
+app.get('/', (req, res) => res.send('Api working as expected! API Created by Zarknex 💀'))
 app.use("/api/users", userRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
 
