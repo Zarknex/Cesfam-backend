@@ -124,8 +124,51 @@ const profile = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-  return
-}
+  const users = await User.find().select(
+    "-password -confirmated -token -createdAt -updatedAt"
+  );
+  if (!users) {
+    return res.status(404).json({
+      msg: "No se encontro la información.",
+    });
+  }
+  res.json(users);
+};
+
+const getUser = async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.findById(id).select(
+    "-confirmated -token -createdAt -updatedAt"
+  );
+  if (!user) {
+    return res.status(404).json({ msg: "No encontrado" });
+  }
+  res.json(user);
+};
+
+const editUser = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    const error = new Error("No encontrado");
+    return res.status(404).json({ msg: error.message });
+  }
+  user.username = req.body.username || user.username;
+  user.password = req.body.password || user.password;
+  user.name = req.body.name || user.name;
+  user.lastName = req.body.lastName || user.lastName;
+  user.email = req.body.email || user.email;
+  user.phone = req.body.phone || user.phone;
+  user.typeUser = req.body.typeUser || user.typeUser;
+
+  try {
+    const userStored = await user.save();
+    res.json(userStored);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export {
   register,
@@ -136,4 +179,6 @@ export {
   newPass,
   profile,
   getUsers,
+  getUser,
+  editUser,
 };

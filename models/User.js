@@ -38,12 +38,10 @@ const userSchema = mongoose.Schema(
     tutorName: {
       type: String,
       trim: true,
-      unique: true,
     },
     tutorLastName: {
       type: String,
       trim: true,
-      unique: true,
     },
     token: {
       type: String,
