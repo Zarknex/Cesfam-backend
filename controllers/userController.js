@@ -7,7 +7,7 @@ const register = async (req, res) => {
   const existUser = await User.findOne({ username });
 
   if (existUser) {
-    const error = new Error("El correo ya se encuentra registrado");
+    const error = new Error("El usuario ya se encuentra registrado");
     return res.status(400).json({ msg: error.message });
   }
 
@@ -33,10 +33,10 @@ const auth = async (req, res) => {
   }
 
   //User confirmated comprobation
-  if (!user.confirmated) {
-    const error = new Error("La cuenta no ha sido confirmada");
-    return res.status(403).json({ msg: error.message });
-  }
+  //if (!user.confirmated) {
+  //const error = new Error("La cuenta no ha sido confirmada");
+  //  return res.status(403).json({ msg: error.message });
+  //}
 
   if (await user.confirmPass(password)) {
     res.json({
@@ -123,6 +123,10 @@ const profile = async (req, res) => {
   res.json(user);
 };
 
+const getUsers = async (req, res) => {
+  return
+}
+
 export {
   register,
   auth,
@@ -131,4 +135,5 @@ export {
   confirmMailToken,
   newPass,
   profile,
+  getUsers,
 };
