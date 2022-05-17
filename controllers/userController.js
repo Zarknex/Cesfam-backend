@@ -170,6 +170,24 @@ const editUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    const error = new Error("No encontrado");
+    return res.status(404).json({ msg: error.message });
+  }
+
+  try {
+    await user.deleteOne();
+    res.json({ msg: "Usuario eliminado" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   register,
   auth,
@@ -181,4 +199,5 @@ export {
   getUsers,
   getUser,
   editUser,
+  deleteUser,
 };

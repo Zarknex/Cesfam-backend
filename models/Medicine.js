@@ -11,22 +11,18 @@ const medicineSchema = mongoose.Schema(
     stock: {
       type: Number,
       trim: true,
-      required: true,
     },
     manufacturer: {
       type: String,
       trim: true,
-      required: true
     },
     content: {
       type: String,
       trim: true,
-      required: true
     },
     typeMedicine: {
       type: String,
-      trim: true,
-      required: true
+      trim: true,e
     }
   },
   {
