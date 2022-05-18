@@ -9,7 +9,7 @@ const medicineSchema = mongoose.Schema(
       unique: true,
     },
     stock: {
-      type: Number,
+      type: String,
       trim: true,
     },
     manufacturer: {
@@ -22,7 +22,7 @@ const medicineSchema = mongoose.Schema(
     },
     typeMedicine: {
       type: String,
-      trim: true,e
+      trim: true,
     }
   },
   {

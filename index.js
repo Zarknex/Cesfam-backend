@@ -1,9 +1,10 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import connectDB from './config/db.js';
-import userRoutes from './routes/userRoutes.js';
-import prescriptionRoutes from './routes/prescriptionRoutes.js';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connectDB from "./config/db.js";
+import userRoutes from "./routes/userRoutes.js";
+import prescriptionRoutes from "./routes/prescriptionRoutes.js";
+import medicineRoutes from "./routes/medicineRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -14,8 +15,8 @@ connectDB();
 const whiteList = [process.env.FRONTEND_URL];
 
 const corsOptions = {
-  origin: function(origin, callback) {
-    if(whiteList.includes(origin)) {
+  origin: function (origin, callback) {
+    if (whiteList.includes(origin)) {
       //Can request API
       callback(null, true);
     } else {
@@ -23,18 +24,20 @@ const corsOptions = {
       callback(null, true);
       //callback(new Error("Error de CORS"));
     }
-  }
+  },
 };
 
 app.use(cors(corsOptions));
 
-
 const port = process.env.PORT || 4000;
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Api working as expected! API Created by Zarknex 💀'))
+app.get("/", (req, res) =>
+  res.send("Api working as expected! API Created by Zarknex 💀")
+);
 app.use("/api/users", userRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
+app.use("/api/medicines", medicineRoutes);
 
 app.listen(port, () => {
   console.log(`Server started on port: ${port}`);
