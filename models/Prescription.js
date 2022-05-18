@@ -5,7 +5,10 @@ const prescriptionSchema = mongoose.Schema(
     doctorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+    },
+    patientId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     patientName: {
       type: String,
@@ -37,11 +40,10 @@ const prescriptionSchema = mongoose.Schema(
       trim: true,
       required: true,
     },
-    idMedicinePatient: [
-      {type: String,}
-      //{ type: mongoose.Schema.Types.ObjectId,
-      //  ref: "Medicine" },
-    ],
+    idMedicinePatient: {
+      type: Array
+    }
+    ,
     dosePatient: {
       type: String,
       trim: true,

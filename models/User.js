@@ -55,6 +55,10 @@ const userSchema = mongoose.Schema(
       type: String,
       default: false,
     },
+    prescriptions: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Prescription' 
+    }],
   },
   {
     timestamps: true,

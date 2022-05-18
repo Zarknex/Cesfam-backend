@@ -47,10 +47,8 @@ const editMedicine = async (req, res) => {
 };
 
 const newMedicine = async (req, res) => {
-  const medicine = new Medicine(req.body);
-  medicine._id = req.user._id;
-
   try {
+    const medicine = new Medicine(req.body);
     const medicineStored = await medicine.save();
     res.json(medicineStored);
   } catch (error) {
@@ -75,6 +73,17 @@ const deleteMedicine = async (req, res) => {
     console.log(error);
   }
 };
+
+  const getMeds = async (req, res) => {
+    const medicine = await Medicine.find().select("-stock -manufacturer -content -typeMedicine -createdAt -updatedAt")
+
+  if (!medicine) {
+    return res.status(404).json({
+      msg: "No encontrado",
+    });
+  }
+  res.json(medicine);
+  }
   
 export {
   getMedicine,
@@ -82,4 +91,5 @@ export {
   editMedicine,
   newMedicine,
   deleteMedicine,
+  getMeds
 };

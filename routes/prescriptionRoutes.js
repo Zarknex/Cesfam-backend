@@ -15,6 +15,8 @@ router
   .get(checkAuth, getPrescriptions)
   .post(checkAuth, newPrescription);
 
+
+
 router
   .route("/:id")
   .get(checkAuth, getPrescription)
