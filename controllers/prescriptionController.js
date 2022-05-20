@@ -4,7 +4,7 @@ import User from "../models/User.js";
 const getPrescription = async (req, res) => {
   const { id } = req.params;
 
-  const prescription = await Prescription.findById(id).populate("patientId ");
+  const prescription = await Prescription.where('patientId').equals(id)
 
 
   if (!prescription) {
@@ -15,9 +15,6 @@ const getPrescription = async (req, res) => {
 
 const getPrescriptions = async (req, res) => {
   const prescription = await Prescription.find()
-    .where("doctorId")
-    .equals(req.user).select("-patientId");
-
   if (!prescription) {
     return res.status(404).json({
       msg: "No encontrado",
@@ -69,7 +66,6 @@ const newPrescription = async (req, res) => {
 
   try {
     const prescriptionStored = await Prescription.create(req.body);
-    console.log(prescriptionStored._id);
     // Almacenar el ID en el proyecto
 
     existsPrescription.prescriptions.push(prescriptionStored._id);
@@ -89,10 +85,6 @@ const deletePrescription = async (req, res) => {
   if (!prescription) {
     const error = new Error("No encontrado");
     return res.status(404).json({ msg: error.message });
-  }
-  if (prescription.doctorId.toString() !== req.user._id.toString()) {
-    const error = new Error("Acción no vlida");
-    return res.status(401).json({ msg: error.message });
   }
 
   try {

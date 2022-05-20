@@ -14,7 +14,6 @@ const register = async (req, res) => {
   try {
     const user = new User(req.body);
     user.token = generateId();
-    console.log(user);
     const userStored = await user.save();
     res.json(userStored);
   } catch (error) {
@@ -140,7 +139,7 @@ const getUser = async (req, res) => {
 
   const user = await User.findById(id).select(
     "-confirmated -token -createdAt -updatedAt"
-  );
+  ).populate('prescriptions');
   if (!user) {
     return res.status(404).json({ msg: "No encontrado" });
   }

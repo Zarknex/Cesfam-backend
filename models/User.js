@@ -49,7 +49,6 @@ const userSchema = mongoose.Schema(
     typeUser:{
       type: String,
       trim: true,
-      unique: true,
     },
     confirmated: {
       type: String,
