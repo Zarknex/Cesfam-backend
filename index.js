@@ -53,6 +53,7 @@ app.post("/api", async (req, res) => {
   res.send(`Mensaje enviado correctamente ${message}`);
 });
 
+
 const client = new Client({
   authStrategy: new LocalAuth(),
 });

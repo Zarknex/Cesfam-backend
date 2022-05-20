@@ -1,6 +1,17 @@
 import User from "../models/User.js";
 import generateId from "../helpers/generateId.js";
 import generateJWT from "../helpers/generateJWT.js";
+import emailSender from "../helpers/email.js";
+
+const sendMail = async (req,res) => {
+  const {email, name} = req.body;
+  try {
+    emailSender(email, name);
+  } catch (error) {
+    console.log(error);
+  }
+  
+}
 
 const register = async (req, res) => {
   const { username } = req.body;
@@ -199,4 +210,5 @@ export {
   getUser,
   editUser,
   deleteUser,
+  sendMail,
 };

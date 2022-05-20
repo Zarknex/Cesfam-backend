@@ -12,6 +12,7 @@ import {
   getUser,
   editUser,
   deleteUser,
+  sendMail
 } from "../controllers/userController.js";
 import checkAuth from "../middleware/checkAuth.js";
 
@@ -23,6 +24,7 @@ router.post("/forgot-password", forgotPass); //Se envia correo
 router.route("/forgot-password/:token").get(confirmMailToken).post(newPass); //Se recibe el token y luego se crea una nueva contraseña
 router.get("/list", getUsers);
 router.get("/profile", checkAuth, profile);
+router.post("/mail", sendMail);
 
 router
   .route("/:id")
