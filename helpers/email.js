@@ -10,8 +10,8 @@ const emailSender = async (datos) => {
     host: "smtp-mail.outlook.com",
     port: 587,
     auth: {
-      user: "rmttck@outlook.com",
-      pass: "mati156489",
+      user: "mail@outlok.com",
+      pass: "password",
     },
   });
   
